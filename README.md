@@ -39,6 +39,28 @@ For the string scope the pattern matching is escaped:
 Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[_]%'")
 ```
 
+## Install
+
+Add to your Gemfile:
+
+```ruby
+gem "type_scopes"
+```
+
+And run in your terminal:
+
+```shell
+bundle install
+```
+
+Then include TypeScopes from your models:
+
+```ruby
+class Transaction < ActiveRecord::Base
+  include TypeScopes
+end
+```
+
 ## MIT License
 
 Made by [Base Secrète](https://basesecrete.com/en).
