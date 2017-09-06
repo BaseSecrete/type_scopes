@@ -26,26 +26,3 @@ module StringScopes
     end
   end
 end
-
-# Type Scopes automatically create the relevant scopes for your columns' model.
-# It handles column types: date time, numerics and strings.
-
-# Example
-
-# We have the following model Person: name, born_at, size
-
-# Person.born_to(10.years.ago)
-# Person.born_from(10.years.ago)
-# Person.born_after(10.years.ago)
-# Person.born_before(10.years.ago)
-# Person.born_between(20.years.ago, 10.years.ago)
-
-# Person.size_to(175)
-# Person.size_from(175)
-# Person.size_below(175)
-# Person.size_above(175)
-# Person.size_between(170, 189)
-
-# Person.name_contains("Alexis")
-# Person.name_stars_with("Al")
-# Person.name_ends_with("is")
