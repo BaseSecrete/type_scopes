@@ -1,7 +1,7 @@
 # Type Scopes
 
 Type scopes creates useful scopes based on the type of the columns of your models.
-It handles date, time, strings and numerics.
+It handles dates, times, strings and numerics.
 
 Here is an example of all the available scopes:
 
