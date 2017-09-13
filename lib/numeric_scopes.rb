@@ -1,4 +1,6 @@
 module NumericScopes
+  TYPES = ["integer", "double precision", "numeric"].freeze
+
   def self.included(model)
     model.extend(ClassMethods)
     model.create_numeric_scopes
@@ -7,7 +9,7 @@ module NumericScopes
   module ClassMethods
     def create_numeric_scopes
       for column in columns
-        if column.sql_type.index("integer") == 0
+        if TYPES.include?(column.sql_type)
           create_numeric_scopes_for_column(column.name)
         end
       end
