@@ -33,14 +33,14 @@ Transaction.description_starts_with("foo") # => where("description LIKE 'foo%'")
 Transaction.description_ends_with("foo") # => where("description LIKE '%foo'")
 
 # Boolean scopes
-Transaction.non_profit? # => where("non_profit = true")
-Transaction.not_non_profit? # => where("non_profit = false")
-Transaction.is_valid? # => where("is_valid = true")
-Transaction.is_not_valid? # => where("is_valid = false")
-Transaction.has_payment? # => where("has_payment = true")
-Transaction.has_not_payment? # => where("has_payment = false")
-Transaction.was_processed? # => where("was_processed = true")
-Transaction.was_not_processed? # => where("was_processed = false")
+Transaction.non_profit # => where("non_profit = true")
+Transaction.not_non_profit # => where("non_profit = false")
+Transaction.is_valid # => where("is_valid = true")
+Transaction.is_not_valid # => where("is_valid = false")
+Transaction.has_payment # => where("has_payment = true")
+Transaction.has_not_payment # => where("has_payment = false")
+Transaction.was_processed # => where("was_processed = true")
+Transaction.was_not_processed # => where("was_processed = false")
 ```
 
 For the string scope the pattern matching is escaped:
