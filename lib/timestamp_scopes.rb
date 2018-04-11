@@ -1,4 +1,6 @@
 module TimestampScopes
+  TYPES = ["timestamp", "datetime"].freeze
+
   def self.included(model)
     model.extend(ClassMethods)
     model.create_timestamp_scopes
@@ -7,7 +9,7 @@ module TimestampScopes
   module ClassMethods
     def create_timestamp_scopes
       for column in columns
-        if column.sql_type.index("timestamp") == 0
+        if TYPES.include?(column.sql_type)
           create_timestamp_scopes_for_column(column.name)
         end
       end
