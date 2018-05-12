@@ -9,7 +9,7 @@ module TimestampScopes
   module ClassMethods
     def create_timestamp_scopes
       for column in columns
-        if TYPES.include?(column.sql_type)
+        if TYPES.any? { |type| column.sql_type.include?(type) }
           create_timestamp_scopes_for_column(column.name)
         end
       end

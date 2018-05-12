@@ -9,7 +9,7 @@ module NumericScopes
   module ClassMethods
     def create_numeric_scopes
       for column in columns
-        if TYPES.include?(column.sql_type)
+        if TYPES.any? { |type| column.sql_type.include?(type) }
           create_numeric_scopes_for_column(column.name)
         end
       end
