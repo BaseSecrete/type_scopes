@@ -1,5 +1,5 @@
 module NumericScopes
-  TYPES = ["integer", "double precision", "numeric"].freeze
+  TYPES = ["integer", "double precision", "numeric", "bigint"].freeze
 
   def self.included(model)
     model.extend(ClassMethods)
