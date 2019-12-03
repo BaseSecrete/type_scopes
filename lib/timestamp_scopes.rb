@@ -1,5 +1,5 @@
 module TimestampScopes
-  TYPES = ["timestamp", "datetime"].freeze
+  TYPES = ["timestamp", "datetime", "date"].freeze
 
   def self.included(model)
     model.extend(ClassMethods)
