@@ -14,11 +14,11 @@ class Transaction < ActiveRecord::Base
 end
 
 # Time scopes
-Transaction.paid_to("2017-09-06") # => where("paid_to <= '2017-09-06'")
-Transaction.paid_from("2017-09-06") # => where("paid_to >= '2017-09-06'")
-Transaction.paid_after("2017-09-06") # => where("paid_to > '2017-09-06'")
-Transaction.paid_before("2017-09-06") #= where("paid_to < '2017-09-06'")
-Transaction.paid_between("2017-09-06", "2017-09-07")  # => where("paid_to BETWEEN '2017-09-06' AND '2017-09-07'")
+Transaction.paid_to("2017-09-06") # => where("paid_at <= '2017-09-06'")
+Transaction.paid_from("2017-09-06") # => where("paid_at >= '2017-09-06'")
+Transaction.paid_after("2017-09-06") # => where("paid_at > '2017-09-06'")
+Transaction.paid_before("2017-09-06") #= where("paid_at < '2017-09-06'")
+Transaction.paid_between("2017-09-06", "2017-09-07")  # => where("paid_at BETWEEN '2017-09-06' AND '2017-09-07'")
 
 # Numeric scopes
 Transaction.amount_to(100) # => where("amount <= 100")
