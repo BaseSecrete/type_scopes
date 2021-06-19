@@ -22,7 +22,7 @@ module TimestampScopes
       scope :"#{short_name}_after", lambda { |date| where("#{quoted_table_name}.#{name} > ?", date) }
       scope :"#{short_name}_before", lambda { |date| where("#{quoted_table_name}.#{name} < ?", date) }
       scope :"#{short_name}_between", lambda { |from, to| where("#{quoted_table_name}.#{name} BETWEEN ? AND ?", from, to) }
-      scope :"#{short_name}_within", lambda { |from, to| where("#{quoted_table_name}.#{name} >= ? AND #{quoted_table_name}.#{name} < ?", from, to) }
+      scope :"#{short_name}_within", lambda { |from, to| where("#{quoted_table_name}.#{name} > ? AND #{quoted_table_name}.#{name} < ?", from, to) }
     end
 
     def shorten_column_name(name)

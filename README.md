@@ -19,7 +19,7 @@ Transaction.paid_from("2017-09-06") # => where("paid_at >= '2017-09-06'")
 Transaction.paid_after("2017-09-06") # => where("paid_at > '2017-09-06'")
 Transaction.paid_before("2017-09-06") #= where("paid_at < '2017-09-06'")
 Transaction.paid_between("2017-09-06", "2017-09-07")  # => where("paid_at BETWEEN '2017-09-06' AND '2017-09-07'")
-Transaction.paid_within("2017-09-06", "2017-09-07")  # => where("paid_at >= '2017-09-06' AND paid_at < '2017-09-07'")
+Transaction.paid_within("2017-09-06", "2017-09-07")  # => where("paid_at > '2017-09-06' AND paid_at < '2017-09-07'")
 
 # Numeric scopes
 Transaction.amount_to(100) # => where("amount <= 100")
@@ -27,7 +27,7 @@ Transaction.amount_from(100) # => where("amount >= 100")
 Transaction.amount_above(100) # => where("amount > 100")
 Transaction.amount_below(100) # => where("amount < 100")
 Transaction.amount_between(100, 200) # => where("amount BETWEEN 100 AND 200")
-Transaction.amount_within(100, 200) # => where("amount >= 100 AND amount < 200")
+Transaction.amount_within(100, 200) # => where("amount > 100 AND amount < 200")
 
 # String scopes
 Transaction.description_contains("foo") # => where("description LIKE '%foo%'")
