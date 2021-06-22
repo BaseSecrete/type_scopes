@@ -16,12 +16,13 @@ module NumericScopes
     end
 
     def create_numeric_scopes_for_column(name)
-      scope :"#{name}_to", lambda { |value| where("#{quoted_table_name}.#{name} <= ?", value) }
-      scope :"#{name}_from", lambda { |value| where("#{quoted_table_name}.#{name} >= ?", value) }
-      scope :"#{name}_above", lambda { |value| where("#{quoted_table_name}.#{name} > ?", value) }
-      scope :"#{name}_below", lambda { |value| where("#{quoted_table_name}.#{name} < ?", value) }
-      scope :"#{name}_between", lambda { |from, to| where("#{quoted_table_name}.#{name} BETWEEN ? AND ?", from, to) }
-      scope :"#{name}_within", lambda { |from, to| where("#{quoted_table_name}.#{name} > ? AND #{quoted_table_name}.#{name} < ?", from, to) }
+      full_name = "#{quoted_table_name}.#{name}"
+      scope :"#{name}_to", lambda { |value| where("#{full_name} <= ?", value) }
+      scope :"#{name}_from", lambda { |value| where("#{full_name} >= ?", value) }
+      scope :"#{name}_above", lambda { |value| where("#{full_name} > ?", value) }
+      scope :"#{name}_below", lambda { |value| where("#{full_name} < ?", value) }
+      scope :"#{name}_between", lambda { |from, to| where("#{full_name} BETWEEN ? AND ?", from, to) }
+      scope :"#{name}_within", lambda { |from, to| where("#{full_name} > ? AND #{full_name} < ?", from, to) }
     end
   end
 end

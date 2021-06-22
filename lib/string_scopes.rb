@@ -22,9 +22,10 @@ module StringScopes
     end
 
     def create_string_scopes_for_column(name)
-      scope :"#{name}_contains", lambda { |str| where("#{quoted_table_name}.#{name} LIKE ?", "%#{StringScopes.escape(str)}%") }
-      scope :"#{name}_starts_with", lambda { |str| where("#{quoted_table_name}.#{name} LIKE ?", "#{StringScopes.escape(str)}%") }
-      scope :"#{name}_ends_with", lambda { |str| where("#{quoted_table_name}.#{name} LIKE ?", "%#{StringScopes.escape(str)}") }
+      full_name = "#{quoted_table_name}.#{name}"
+      scope :"#{name}_contains", lambda { |str| where("#{full_name} LIKE ?", "%#{StringScopes.escape(str)}%") }
+      scope :"#{name}_starts_with", lambda { |str| where("#{full_name} LIKE ?", "#{StringScopes.escape(str)}%") }
+      scope :"#{name}_ends_with", lambda { |str| where("#{full_name} LIKE ?", "%#{StringScopes.escape(str)}") }
     end
   end
 end
