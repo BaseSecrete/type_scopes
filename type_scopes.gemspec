@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TypeScopes::VERSION
   spec.authors       = ["Alexis Bernard"]
   spec.email         = ["alexis@bernard.io"]
-  spec.summary       = "Automatic scopes for ActiveRecord models."
-  spec.description   = "Useful scopes based on columns' types (dates, times, strings and numerics)."
+  spec.summary       = "Semantic scopes for your ActiveRecord models."
+  spec.description   = "Automatically create semantic scopes based on columns' types (dates, times, strings and numerics)."
   spec.homepage      = "https://github.com/BaseSecrete/type_scopes"
   spec.license       = "MIT"
 
