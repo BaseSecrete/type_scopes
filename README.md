@@ -57,25 +57,16 @@ Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[
 
 ## Install
 
-Add to your Gemfile:
+Add to your Gemfile `gem "type_scopes"` and run in your terminal `bundle install`. Then include TypeScopes from your models:
 
 ```ruby
-gem "type_scopes"
-```
-
-And run in your terminal:
-
-```shell
-bundle install
-```
-
-Then include TypeScopes from your models:
-
-```ruby
-class Transaction < ActiveRecord::Base
+# /app/models/transaction.rb
+class Transaction < ApplicationRecord
   include TypeScopes
 end
 ```
+
+In case there is a conflict with a scope name, TypeScopes won't over write your existing scope. You can safely include TypeScopes and it won't break any scope defined previously.
 
 ## MIT License
 

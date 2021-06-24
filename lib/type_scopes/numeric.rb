@@ -17,14 +17,14 @@ module TypeScopes::Numeric
 
     def create_numeric_scopes_for_column(name)
       full_name = "#{quoted_table_name}.#{name}"
-      scope :"#{name}_to", lambda { |value| where("#{full_name} <= ?", value) }
-      scope :"#{name}_from", lambda { |value| where("#{full_name} >= ?", value) }
-      scope :"#{name}_above", lambda { |value| where("#{full_name} > ?", value) }
-      scope :"#{name}_below", lambda { |value| where("#{full_name} < ?", value) }
-      scope :"#{name}_between", lambda { |from, to| where("#{full_name} BETWEEN ? AND ?", from, to) }
-      scope :"#{name}_not_between", lambda { |from, to| where("#{full_name} NOT BETWEEN ? AND ?", from, to) }
-      scope :"#{name}_within", lambda { |from, to| where("#{full_name} > ? AND #{full_name} < ?", from, to) }
-      scope :"#{name}_not_within", lambda { |from, to| where("#{full_name} <= ? OR #{full_name} >= ?", from, to) }
+      TypeScopes.append(self, :"#{name}_to", lambda { |value| where("#{full_name} <= ?", value) })
+      TypeScopes.append(self, :"#{name}_from", lambda { |value| where("#{full_name} >= ?", value) })
+      TypeScopes.append(self, :"#{name}_above", lambda { |value| where("#{full_name} > ?", value) })
+      TypeScopes.append(self, :"#{name}_below", lambda { |value| where("#{full_name} < ?", value) })
+      TypeScopes.append(self, :"#{name}_between", lambda { |from, to| where("#{full_name} BETWEEN ? AND ?", from, to) })
+      TypeScopes.append(self, :"#{name}_not_between", lambda { |from, to| where("#{full_name} NOT BETWEEN ? AND ?", from, to) })
+      TypeScopes.append(self, :"#{name}_within", lambda { |from, to| where("#{full_name} > ? AND #{full_name} < ?", from, to) })
+      TypeScopes.append(self, :"#{name}_not_within", lambda { |from, to| where("#{full_name} <= ? OR #{full_name} >= ?", from, to) })
     end
   end
 end

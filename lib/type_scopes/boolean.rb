@@ -16,13 +16,13 @@ module TypeScopes::Boolean
     end
 
     def create_boolean_scopes_for_column(name)
-      scope :"#{name}", lambda { where(table_name => { name => true }) }
+      TypeScopes.append(self, :"#{name}", lambda { where(table_name => { name => true }) })
 
       prefix, suffix = /\A(has|is|was)_(.+)\z/.match(name).to_a[1..2]
       if prefix && suffix
-        scope :"#{prefix}_not_#{suffix}", lambda { where(table_name => { name => false }) }
+        TypeScopes.append(self, :"#{prefix}_not_#{suffix}", lambda { where(table_name => { name => false }) })
       else
-        scope :"not_#{name}", lambda { where(table_name => { name => false }) }
+        TypeScopes.append(self, :"not_#{name}", lambda { where(table_name => { name => false }) })
       end
     end
   end

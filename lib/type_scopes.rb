@@ -5,6 +5,10 @@ module TypeScopes
     model.include(TypeScopes::Numeric)
     model.include(TypeScopes::Boolean)
   end
+
+  def self.append(model, name, block)
+    model.scope(name, block) if !model.respond_to?(name, true)
+  end
 end
 
 require "type_scopes/time"

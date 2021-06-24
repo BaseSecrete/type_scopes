@@ -23,9 +23,9 @@ module TypeScopes::String
 
     def create_string_scopes_for_column(name)
       full_name = "#{quoted_table_name}.#{name}"
-      scope :"#{name}_contains", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}%") }
-      scope :"#{name}_starts_with", lambda { |str| where("#{full_name} LIKE ?", "#{TypeScopes::String.escape(str)}%") }
-      scope :"#{name}_ends_with", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}") }
+      TypeScopes.append(self, :"#{name}_contains", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}%") })
+      TypeScopes.append(self, :"#{name}_starts_with", lambda { |str| where("#{full_name} LIKE ?", "#{TypeScopes::String.escape(str)}%") })
+      TypeScopes.append(self, :"#{name}_ends_with", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}") })
     end
   end
 end
