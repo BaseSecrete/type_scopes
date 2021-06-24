@@ -1,5 +1,5 @@
 module StringScopes
-  TYPES = ["character", "text"].freeze
+  TYPES = ["character", "text", "varchar"].freeze
 
   def self.included(model)
     model.extend(ClassMethods)
