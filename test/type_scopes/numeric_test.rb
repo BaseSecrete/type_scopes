@@ -1,6 +1,6 @@
-require File.expand_path("#{File.dirname(__FILE__)}/test_helper")
+require File.expand_path("../../test_helper", __FILE__)
 
-class NumericScopesTest < TypeScopes::TestCase
+class TypeScopes::NumericTest < TypeScopes::TestCase
   def setup
     TypeScopes::Transaction.connection.truncate(TypeScopes::Transaction.table_name)
     TypeScopes::Transaction.create!(amount: 100)

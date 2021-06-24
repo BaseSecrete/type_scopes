@@ -1,4 +1,4 @@
-module TimestampScopes
+module TypeScopes::Time
   TYPES = ["timestamp", "datetime", "date"].freeze
 
   def self.included(model)

@@ -1,4 +1,4 @@
-module NumericScopes
+module TypeScopes::Numeric
   TYPES = ["integer", "double precision", "numeric", "bigint", "decimal"].freeze
 
   def self.included(model)

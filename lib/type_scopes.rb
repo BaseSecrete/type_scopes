@@ -1,13 +1,13 @@
-require "string_scopes"
-require "numeric_scopes"
-require "timestamp_scopes"
-require "boolean_scopes"
-
 module TypeScopes
   def self.included(model)
-    model.include(StringScopes)
-    model.include(NumericScopes)
-    model.include(TimestampScopes)
-    model.include(BooleanScopes)
+    model.include(TypeScopes::Time)
+    model.include(TypeScopes::String)
+    model.include(TypeScopes::Numeric)
+    model.include(TypeScopes::Boolean)
   end
 end
+
+require "type_scopes/time"
+require "type_scopes/string"
+require "type_scopes/numeric"
+require "type_scopes/boolean"

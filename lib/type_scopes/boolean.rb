@@ -1,4 +1,4 @@
-module BooleanScopes
+module TypeScopes::Boolean
   TYPES = ["bool", "boolean", "tinyint(1)"].freeze
 
   def self.included(model)

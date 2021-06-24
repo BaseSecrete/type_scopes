@@ -1,6 +1,6 @@
-require File.expand_path("#{File.dirname(__FILE__)}/test_helper")
+require File.expand_path("../../test_helper", __FILE__)
 
-class BooleanScopesTest < TypeScopes::TestCase
+class TypeScopes::BooleanTest < TypeScopes::TestCase
   def setup
     TypeScopes::Transaction.connection.truncate(TypeScopes::Transaction.table_name)
     TypeScopes::Transaction.create!(amount: 100, paid_at: "2021-06-23", description: "First transaction")
