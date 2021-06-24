@@ -1,29 +1,18 @@
 module TypeScopes::Boolean
-  TYPES = ["bool", "boolean", "tinyint(1)"].freeze
+  extend TypeScopes::Base
 
-  def self.included(model)
-    model.extend(ClassMethods)
-    model.create_boolean_scopes
+  def self.types
+    ["bool", "boolean", "tinyint(1)"].freeze
   end
 
-  module ClassMethods
-    def create_boolean_scopes
-      for column in columns
-        if TYPES.include?(column.sql_type)
-          create_boolean_scopes_for_column(column.name)
-        end
-      end
-    end
+  def self.create_scopes_for_column(model, name)
+    append_scope(model, :"#{name}", lambda { where(table_name => { name => true }) })
 
-    def create_boolean_scopes_for_column(name)
-      TypeScopes.append(self, :"#{name}", lambda { where(table_name => { name => true }) })
-
-      prefix, suffix = /\A(has|is|was)_(.+)\z/.match(name).to_a[1..2]
-      if prefix && suffix
-        TypeScopes.append(self, :"#{prefix}_not_#{suffix}", lambda { where(table_name => { name => false }) })
-      else
-        TypeScopes.append(self, :"not_#{name}", lambda { where(table_name => { name => false }) })
-      end
+    prefix, suffix = /\A(has|is|was)_(.+)\z/.match(name).to_a[1..2]
+    if prefix && suffix
+      append_scope(model, :"#{prefix}_not_#{suffix}", lambda { where(table_name => { name => false }) })
+    else
+      append_scope(model, :"not_#{name}", lambda { where(table_name => { name => false }) })
     end
   end
 end
