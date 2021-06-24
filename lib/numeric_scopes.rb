@@ -1,5 +1,5 @@
 module NumericScopes
-  TYPES = ["integer", "double precision", "numeric", "bigint"].freeze
+  TYPES = ["integer", "double precision", "numeric", "bigint", "decimal"].freeze
 
   def self.included(model)
     model.extend(ClassMethods)
@@ -22,7 +22,7 @@ module NumericScopes
       scope :"#{name}_above", lambda { |value| where("#{full_name} > ?", value) }
       scope :"#{name}_below", lambda { |value| where("#{full_name} < ?", value) }
       scope :"#{name}_between", lambda { |from, to| where("#{full_name} BETWEEN ? AND ?", from, to) }
-      scope :"#{name}_not_between", lambda { |from, to| where("#{full_name} BETWEEN ? AND ?", from, to) }
+      scope :"#{name}_not_between", lambda { |from, to| where("#{full_name} NOT BETWEEN ? AND ?", from, to) }
       scope :"#{name}_within", lambda { |from, to| where("#{full_name} > ? AND #{full_name} < ?", from, to) }
       scope :"#{name}_not_within", lambda { |from, to| where("#{full_name} <= ? OR #{full_name} >= ?", from, to) }
     end
