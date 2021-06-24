@@ -7,6 +7,7 @@ require "minitest/autorun"
 class TypeScopes::Transaction < ActiveRecord::Base
   class Migration < ActiveRecord::Migration::Current
     def up
+      drop_table :transactions, if_exists: true
       create_table :transactions do |t|
         t.decimal :amount, null: false
         t.datetime :paid_at
@@ -22,7 +23,8 @@ end
 
 class TypeScopes::TestCase < Minitest::Test
   def self.initialize_database
-    ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+    # "postgres:///type_scopes?user=postgres"
+    ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"] || "sqlite3::memory:")
     ActiveRecord::Migration.verbose = false
     TypeScopes::Transaction::Migration.new.up
     TypeScopes::Transaction.include(TypeScopes)
