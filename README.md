@@ -35,8 +35,13 @@ Transaction.amount_not_within(100, 200) # => where("amount <= 100 OR amount >= 2
 
 # String scopes
 Transaction.description_contains("foo") # => where("description LIKE '%foo%'")
+Transaction.description_contains("foo", sensitive: false) # => where("description ILIKE '%foo%'")
 Transaction.description_starts_with("foo") # => where("description LIKE 'foo%'")
+Transaction.description_starts_with("foo", sensitive: false) # => where("description ILIKE 'foo%'")
 Transaction.description_ends_with("foo") # => where("description LIKE '%foo'")
+Transaction.description_ends_with("foo", sensitive: false) # => where("description ILIKE '%foo'")
+Transaction.description_like("%foo%") # => where("description LIKE '%foo%'")
+Transaction.description_ilike("%foo%") # => where("description ILIKE '%foo%'")
 
 # Boolean scopes
 Transaction.non_profit # => where("non_profit = true")
@@ -49,7 +54,7 @@ Transaction.was_processed # => where("was_processed = true")
 Transaction.was_not_processed # => where("was_processed = false")
 ```
 
-For the string scope the pattern matching is escaped:
+For the string colums, the pattern matching is escaped. So it's safe to provide directly a user input. There is an exception for the `column_like` and `column_ilike` where the pattern is not escaped and you shouldn't provide untrusted strings.
 
 ```ruby
 Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[_]%'")

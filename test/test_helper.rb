@@ -29,6 +29,12 @@ class TypeScopes::TestCase < Minitest::Test
     TypeScopes::Transaction::Migration.new.up
     TypeScopes::Transaction.include(TypeScopes)
   end
+
+  def like_case_sensitive?
+    # By default SQLite's like is case insensitive.
+    # So it's not possible to have the exact same tests with other databases.
+    ActiveRecord::Base.connection.adapter_name != "SQLite"
+  end
 end
 
 TypeScopes::TestCase.initialize_database
