@@ -11,10 +11,10 @@ module TypeScopes::String
     string
   end
 
-  def self.create_scopes_for_column(model, column)
-    full_name = "#{model.quoted_table_name}.#{column}"
-    append_scope(model, :"#{column}_contains", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}%") })
-    append_scope(model, :"#{column}_starts_with", lambda { |str| where("#{full_name} LIKE ?", "#{TypeScopes::String.escape(str)}%") })
-    append_scope(model, :"#{column}_ends_with", lambda { |str| where("#{full_name} LIKE ?", "%#{TypeScopes::String.escape(str)}") })
+  def self.create_scopes_for_column(model, name)
+    column = model.arel_table[name]
+    append_scope(model, :"#{name}_contains", lambda { |str| where(column.matches("%" + TypeScopes::String.escape(str) + "%")) })
+    append_scope(model, :"#{name}_starts_with", lambda { |str| where(column.matches(TypeScopes::String.escape(str) + "%")) })
+    append_scope(model, :"#{name}_ends_with", lambda { |str| where(column.matches("%" + TypeScopes::String.escape(str))) })
   end
 end
