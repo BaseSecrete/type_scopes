@@ -38,10 +38,18 @@ Transaction.description_contains("foo") # => where("description LIKE '%foo%'")
 Transaction.description_contains("foo", sensitive: false) # => where("description ILIKE '%foo%'")
 Transaction.description_starts_with("foo") # => where("description LIKE 'foo%'")
 Transaction.description_starts_with("foo", sensitive: false) # => where("description ILIKE 'foo%'")
+Transaction.description_does_not_start_with("foo") # => where("description NOT LIKE 'foo%'")
+Transaction.description_does_not_start_with("foo", sensitive: false) # => where("description NOT ILIKE 'foo%'")
 Transaction.description_ends_with("foo") # => where("description LIKE '%foo'")
 Transaction.description_ends_with("foo", sensitive: false) # => where("description ILIKE '%foo'")
+Transaction.description_does_not_end_with("foo") # => where("description NOT LIKE '%foo'")
+Transaction.description_does_not_end_with("foo", sensitive: false) # => where("description NOT ILIKE '%foo'")
 Transaction.description_like("%foo%") # => where("description LIKE '%foo%'")
+Transaction.description_not_like("%foo%") # => where("description NOT LIKE '%foo%'")
 Transaction.description_ilike("%foo%") # => where("description ILIKE '%foo%'")
+Transaction.description_not_ilike("%foo%") # => where("description NOT ILIKE '%foo%'")
+Transaction.description_matches("^Regex$") # => where("description ~ '^Regex$'")
+Transaction.description_does_not_match("^Regex$") # => where("description !~ '^Regex$'")
 
 # Boolean scopes
 Transaction.non_profit # => where("non_profit = true")
@@ -54,7 +62,7 @@ Transaction.was_processed # => where("was_processed = true")
 Transaction.was_not_processed # => where("was_processed = false")
 ```
 
-For the string colums, the pattern matching is escaped. So it's safe to provide directly a user input. There is an exception for the `column_like` and `column_ilike` where the pattern is not escaped and you shouldn't provide untrusted strings.
+For the string colums, the pattern matching is escaped. So it's safe to provide directly a user input. There is an exception for the `column_like`, `column_ilike`. `column_matches` and `column_does_not_match` where the pattern is not escaped and you shouldn't provide untrusted strings.
 
 ```ruby
 Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[_]%'")
