@@ -1,9 +1,9 @@
-class TypeScopes::Numeric < TypeScopes::Base
+class TypeScopes::Numeric < TypeScopes
   def self.types
     ["integer", "double precision", "numeric", "bigint", "decimal"].freeze
   end
 
-  def self.create_scopes_for_column(model, name)
+  def self.inject_for_column(model, name)
     column = model.arel_table[name]
     append_scope(model, :"#{name}_to", lambda { |value| where(column.lteq(value)) })
     append_scope(model, :"#{name}_from", lambda { |value| where(column.gteq(value)) })

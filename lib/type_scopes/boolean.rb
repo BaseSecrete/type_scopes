@@ -1,9 +1,9 @@
-class TypeScopes::Boolean < TypeScopes::Base
+class TypeScopes::Boolean < TypeScopes
   def self.types
     ["bool", "boolean", "tinyint(1)"].freeze
   end
 
-  def self.create_scopes_for_column(model, name)
+  def self.inject_for_column(model, name)
     append_scope(model, :"#{name}", lambda { where(name => true) })
     prefix, suffix = /\A(has|is|was)_(.+)\z/.match(name).to_a[1..2]
     if prefix && suffix

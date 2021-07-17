@@ -27,7 +27,7 @@ class TypeScopes::TestCase < Minitest::Test
     ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"] || "sqlite3::memory:")
     ActiveRecord::Migration.verbose = false
     TypeScopes::Transaction::Migration.new.up
-    TypeScopes.for_columns TypeScopes::Transaction
+    TypeScopes.inject TypeScopes::Transaction
   end
 
   def sql_adapter_like_case_sensitive?

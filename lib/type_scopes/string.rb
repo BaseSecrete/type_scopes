@@ -1,4 +1,4 @@
-class TypeScopes::String < TypeScopes::Base
+class TypeScopes::String < TypeScopes
   def self.types
     ["character", "text", "varchar"].freeze
   end
@@ -9,7 +9,7 @@ class TypeScopes::String < TypeScopes::Base
     string
   end
 
-  def self.create_scopes_for_column(model, name)
+  def self.inject_for_column(model, name)
     column = model.arel_table[name]
     append_scope(model, :"#{name}_like", lambda { |str, sensitive: true| where(column.matches(str, nil, sensitive)) })
     append_scope(model, :"#{name}_not_like", lambda { |str, sensitive: true| where(column.does_not_match(str, nil, sensitive)) })

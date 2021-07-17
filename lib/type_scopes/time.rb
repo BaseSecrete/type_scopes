@@ -1,9 +1,9 @@
-class TypeScopes::Time < TypeScopes::Base
+class TypeScopes::Time < TypeScopes
   def self.types
     ["timestamp", "datetime", "date"].freeze
   end
 
-  def self.create_scopes_for_column(model, name)
+  def self.inject_for_column(model, name)
     short_name = shorten_column_name(name)
     column = model.arel_table[name]
 

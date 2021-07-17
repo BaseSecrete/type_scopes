@@ -10,7 +10,7 @@ Here are examples for all the available scopes:
 # amount: decimal
 # description: string
 class Transaction < ActiveRecord::Base
-  include TypeScopes
+  TypeScopes.inject self
 end
 
 # Time scopes
@@ -62,7 +62,7 @@ Transaction.was_processed # => where("was_processed = true")
 Transaction.was_not_processed # => where("was_processed = false")
 ```
 
-For the string colums, the pattern matching is escaped. So it's safe to provide directly a user input. There is an exception for the `column_like`, `column_ilike`. `column_matches` and `column_does_not_match` where the pattern is not escaped and you shouldn't provide untrusted strings.
+For the string colums, the pattern matching is escaped. So it's safe to provide directly a user input. There is an exception for the `column_like`, `column_ilike`, `column_matches` and `column_does_not_match` where the pattern is not escaped and you shouldn't provide untrusted strings.
 
 ```ruby
 Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[_]%'")
@@ -70,16 +70,20 @@ Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[
 
 ## Install
 
-Add to your Gemfile `gem "type_scopes"` and run in your terminal `bundle install`. Then include TypeScopes from your models:
+Add to your Gemfile `gem "type_scopes"` and run in your terminal `bundle install`. Then call `TypeScopes.inject` from your models:
 
 ```ruby
 # /app/models/transaction.rb
 class Transaction < ApplicationRecord
-  include TypeScopes
+  # Creates scope for all supported column types
+  TypeScopes.inject self
+
+  # Or if you prefer to enable scopes for specific columns only
+  TypeScopes.inject self, :amount, :paid_at
 end
 ```
 
-In case there is a conflict with a scope name, TypeScopes won't over write your existing scope. You can safely include TypeScopes and it won't break any scope defined previously.
+In case there is a conflict with a scope name, TypeScopes won't over write your existing scope. You can safely inject TypeScopes and it won't break any scope defined previously.
 
 ## MIT License
 
