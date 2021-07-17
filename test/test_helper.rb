@@ -23,11 +23,11 @@ end
 
 class TypeScopes::TestCase < Minitest::Test
   def self.initialize_database
-    # "postgres:///type_scopes?user=postgres"
+    # To run against Postgresql set variable : DATABASE_URL=postgres:///type_scopes?user=postgres
     ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"] || "sqlite3::memory:")
     ActiveRecord::Migration.verbose = false
     TypeScopes::Transaction::Migration.new.up
-    TypeScopes::Transaction.include(TypeScopes)
+    TypeScopes.for_columns TypeScopes::Transaction
   end
 
   def sql_adapter_like_case_sensitive?

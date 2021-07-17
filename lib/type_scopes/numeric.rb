@@ -1,6 +1,4 @@
-module TypeScopes::Numeric
-  extend TypeScopes::Base
-
+class TypeScopes::Numeric < TypeScopes::Base
   def self.types
     ["integer", "double precision", "numeric", "bigint", "decimal"].freeze
   end

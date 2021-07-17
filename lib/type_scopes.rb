@@ -1,9 +1,15 @@
 module TypeScopes
-  def self.included(model)
-    model.include(TypeScopes::Time)
-    model.include(TypeScopes::String)
-    model.include(TypeScopes::Numeric)
-    model.include(TypeScopes::Boolean)
+  def self.for_columns(model, columns = model.columns.map(&:name))
+    columns.each { |name| create_scopes_for_column(model, name.to_s) }
+  end
+
+  def self.create_scopes_for_column(model, name)
+    if column = model.columns_hash[name]
+      Time.support?(column.sql_type) && Time.create_scopes_for_column(model, name)
+      String.support?(column.sql_type) && String.create_scopes_for_column(model, name)
+      Numeric.support?(column.sql_type) && Numeric.create_scopes_for_column(model, name)
+      Boolean.support?(column.sql_type) && Boolean.create_scopes_for_column(model, name)
+    end
   end
 end
 

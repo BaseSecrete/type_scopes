@@ -1,6 +1,4 @@
-module TypeScopes::Boolean
-  extend TypeScopes::Base
-
+class TypeScopes::Boolean < TypeScopes::Base
   def self.types
     ["bool", "boolean", "tinyint(1)"].freeze
   end

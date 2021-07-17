@@ -1,6 +1,4 @@
-module TypeScopes::Time
-  extend TypeScopes::Base
-
+class TypeScopes::Time < TypeScopes::Base
   def self.types
     ["timestamp", "datetime", "date"].freeze
   end

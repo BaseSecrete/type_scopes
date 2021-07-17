@@ -1,6 +1,4 @@
-module TypeScopes::String
-  extend TypeScopes::Base
-
+class TypeScopes::String < TypeScopes::Base
   def self.types
     ["character", "text", "varchar"].freeze
   end
