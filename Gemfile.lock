@@ -1,36 +1,36 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.1.3.2)
-      activesupport (= 6.1.3.2)
-    activerecord (6.1.3.2)
-      activemodel (= 6.1.3.2)
-      activesupport (= 6.1.3.2)
-    activesupport (6.1.3.2)
+    activemodel (7.0.4.1)
+      activesupport (= 7.0.4.1)
+    activerecord (7.0.4.1)
+      activemodel (= 7.0.4.1)
+      activesupport (= 7.0.4.1)
+    activesupport (7.0.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
-    concurrent-ruby (1.1.9)
-    i18n (1.8.10)
+    concurrent-ruby (1.1.10)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    minitest (5.14.4)
-    pg (1.2.3)
-    rake (13.0.3)
-    sqlite3 (1.4.2)
-    tzinfo (2.0.4)
+    mini_portile2 (2.8.1)
+    minitest (5.17.0)
+    pg (1.4.5)
+    rake (13.0.6)
+    sqlite3 (1.6.0)
+      mini_portile2 (~> 2.8.0)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (>= 6.1.3.2)
+  activerecord
   pg
   rake
   sqlite3
 
 BUNDLED WITH
-   2.1.4
+   2.2.22
