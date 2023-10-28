@@ -1,5 +1,6 @@
 class TypeScopes
-  def self.inject(model, column_names = model.columns.map(&:name))
+  def self.inject(model, column_names = nil)
+    column_names ||= model.table_exists? ? model.columns.map(&:name) : []
     for name in column_names
       if column = model.columns_hash[name]
         Time.support?(column.sql_type) && Time.inject_for_column(model, name)
