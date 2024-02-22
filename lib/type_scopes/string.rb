@@ -18,10 +18,6 @@ class TypeScopes::String < TypeScopes
       send("#{name}_not_like", "%#{sanitize_sql_like(str)}%", sensitive: sensitive)
     })
 
-    append_scope(model, :"#{name}_does_not_contain", lambda { |str, sensitive: true|
-      send("#{name}_like", "%#{sanitize_sql_like(str)}%", sensitive: sensitive)
-    })
-
     append_scope(model, :"#{name}_starts_with", lambda { |str, sensitive: true|
       send("#{name}_like", "#{sanitize_sql_like(str)}%", sensitive: sensitive)
     })
