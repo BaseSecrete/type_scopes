@@ -1,8 +1,13 @@
 # Type Scopes
 
 Type scopes creates useful semantic scopes based on the type of the columns of your models.
-It handles dates, times, strings, numerics and booleans.
+The goal is help to write eloquent code such as:
 
+```ruby
+Transaction.paid_after(Date.yesterday).amount_between(100, 200).not_refunded
+```
+
+It handles dates, times, strings, numerics and booleans.
 Here are examples for all the available scopes:
 
 ```ruby
@@ -70,7 +75,8 @@ Transaction.description_contains("%foo_") # => where("description LIKE '%[%]foo[
 
 ## Install
 
-Add to your Gemfile `gem "type_scopes"` and run in your terminal `bundle install`. Then call `TypeScopes.inject` from your models:
+Add to your Gemfile `gem "type_scopes"` and run in your terminal `bundle install`.
+Then call `TypeScopes.inject self` from your models:
 
 ```ruby
 # /app/models/transaction.rb
