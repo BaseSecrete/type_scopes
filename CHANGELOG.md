@@ -1,10 +1,10 @@
 # Changelog of Type scopes
 
-## Unrealeased
+## 0.6.1 (2024-02-22)
 
 - Check if table exists to prevent from ActiveRecord::StatementInvalid
 
-## 0.6
+## 0.6 (2021-10-15)
 
 - Refactor by switching modules into classes.
 
