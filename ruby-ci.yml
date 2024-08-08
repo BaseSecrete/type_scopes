@@ -1,0 +1,18 @@
+version: 1
+
+build_packs:
+  rails: {}
+  ruby:
+    version: 3.3.2
+  node_js:
+    # Available versions: [12..19]
+    version: 14.15.0
+  postgresql:
+    # Available versions: [9..16]
+    version: '16'
+  image_magick:
+    # Available versions: [7.0.10-58]
+    version: 7.0.10-58
+  geckodriver:
+    # Available versions: [0.29.1, 0.30.0, 0.31.0, 0.32.0]
+    version: 0.29.1
