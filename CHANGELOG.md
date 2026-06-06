@@ -1,5 +1,9 @@
 # Changelog of Type scopes
 
+## Unreleased
+
+- Scopes between and not_between accept two arguments or a range
+
 ## 0.6.1 (2024-02-22)
 
 - Check if table exists to prevent from ActiveRecord::StatementInvalid

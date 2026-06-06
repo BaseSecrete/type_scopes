@@ -30,11 +30,28 @@ class TypeScopes::TimeTest < TypeScopes::TestCase
   def test_between
     assert_equal(2, TypeScopes::Transaction.paid_between("2021-06-23", "2021-06-24T00:00:00").count)
     assert_equal(0, TypeScopes::Transaction.paid_between("2021-06-23T00:00:01", "2021-06-23T23:59:59").count)
+
+    range = Time.utc(2021, 6, 23)..Time.utc(2021, 6, 24)
+    assert_equal(2, TypeScopes::Transaction.paid_between(range).count)
+
+    range = Time.utc(2021, 6, 23, 0, 0, 1)..Time.utc(2021, 6, 23, 23, 59, 59)
+    assert_equal(0, TypeScopes::Transaction.paid_between(range).count)
+
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_between }
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_between(1) }
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_between(1, 2, 3) }
   end
 
   def test_not_between
     assert_equal(0, TypeScopes::Transaction.paid_not_between("2021-06-23", "2021-06-24T00:00:00").count)
     assert_equal(2, TypeScopes::Transaction.paid_not_between("2021-06-23T00:00:01", "2021-06-23T23:59:59").count)
+
+    range = Time.utc(2021, 6, 23)..Time.utc(2021, 6, 24)
+    assert_equal(0, TypeScopes::Transaction.paid_not_between(range).count)
+
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_not_between }
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_not_between(1) }
+    assert_raises(ArgumentError) { TypeScopes::Transaction.paid_not_between(1, 2, 3) }
   end
 
   def test_within

@@ -29,12 +29,16 @@ class TypeScopes::NumericTest < TypeScopes::TestCase
 
   def test_between
     assert_equal(2, TypeScopes::Transaction.amount_between(100, 200).count)
+    assert_equal(2, TypeScopes::Transaction.amount_between(100..200).count)
     assert_equal(0, TypeScopes::Transaction.amount_between(100.01, 199.99).count)
+    assert_equal(0, TypeScopes::Transaction.amount_between(100.01..199.99).count)
   end
 
   def test_not_between
     assert_equal(0, TypeScopes::Transaction.amount_not_between(100, 200).count)
+    assert_equal(0, TypeScopes::Transaction.amount_not_between(100..200).count)
     assert_equal(2, TypeScopes::Transaction.amount_not_between(100.01, 199.99).count)
+    assert_equal(2, TypeScopes::Transaction.amount_not_between(100.01..199.99).count)
   end
 
   def test_within

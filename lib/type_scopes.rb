@@ -26,6 +26,16 @@ class TypeScopes
   def self.inject_for_column(model, name)
     raise NotImplementedError
   end
+
+  def self.args_to_range(*args)
+    if args.size == 1
+      args[0].is_a?(Range) ? args[0] : raise(ArgumentError.new("Argument must be a Range"))
+    elsif args.size == 2
+      args[0]..args[1]
+    else
+      raise ArgumentError.new("wrong number of arguments (given #{args.size}, expected 1..2)")
+    end
+  end
 end
 
 require "type_scopes/time"
